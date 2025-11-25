@@ -1,0 +1,57 @@
+\documentclass[portugues,msc]{ppgccufmg}
+
+\usepackage{lipsum} % remover na versão final
+
+\graphicspath{{../}}
+
+\begin{document}
+
+\ppgccufmg{
+    autor={Eduardo Henrique Basilio de Carvalho, Renan Neves da Silva},
+    titulo={Trabalho 2 - Motor de Indução},
+    cidade={Belo Horizonte},
+    ano={2025},
+    versao={1.0},
+    orientador={Prof. Rodrigo Rodrigues Bastos},
+    resumo={resumo.tex},
+    abstracten={abstract.tex},
+    palavraschave={conversores, motor de indução},
+    keywords={converters, induction motor}
+}
+
+\chapter{Parâmetros do Circuito Equivalente}
+
+\ref{fig:parametros_preset6} mostra os parâmetros do modelo predefinido de número 6 do bloco \textit{Asynchronous Machine SI Units} do Simulink, para tipo de rotor \textit{Squirrel Cage}.
+
+\begin{figure}[ht]
+    \centering
+    \caption{Parâmetros do modelo predefinido 6 do bloco \textit{Asynchronous Machine SI Units}.}
+    \label{fig:parametros_preset6}
+    \includegraphics[width=0.7\textwidth]{T2_M6_params.png} \\
+    \small Fonte: captura de tela do programa Simulink na versão R2024b.
+\end{figure}
+
+Tais parâmetros são transcritos em \ref{tab:parametros_preset6}.
+
+\begin{table}[ht]
+    \centering
+    \caption{Parâmetros do modelo predefinido 6 do bloco \textit{Asynchronous Machine SI Units}.}
+    \label{tab:parametros_preset6}
+    \begin{tabular}{lll}
+        \hline
+        \textbf{Parâmetro} & \textbf{Símbolo} & \textbf{Valor} \\ \hline
+        Potência nominal & $P_{n}$ & 111.9 kVA \\
+        Tensão nominal de linha & $V_{n}$ & 460 V\textsubscript{rms} \\
+        Frequência nominal & $f_{n}$ & 60 Hz \\
+        Resistência do estator & $R_{s}$ & 0.0302 $\Omega$ \\
+        Indutância do estator & $L_{s}$ & 0.000283 H \\
+        Resistência do rotor & $R_{r}'$ & 0.1721 $\Omega$ \\
+        Indutância do rotor & $L_{r}'$ & 0.000283 H \\
+        Indutância mútua & $L_{m}$ & 0.01095 H \\
+        Inércia & $J$ & 2 kg.m$^{2}$ \\
+        Fator de fricção & $F$ & 0.02154 Nms \\
+        Número de pares de polos & $p$ & 2 \\ \hline
+    \end{tabular}
+\end{table}
+
+\end{document}
