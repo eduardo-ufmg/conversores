@@ -1,8 +1,13 @@
 \documentclass[portugues,msc]{ppgccufmg}
-
-\usepackage{lipsum} % remover na versão final
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{cleveref}
 
 \graphicspath{{../}}
+
+\crefname{figure}{Figura}{Figuras}
+\crefname{table}{Tabela}{Tabelas}
+\crefname{equation}{Equação}{Equações}
 
 \begin{document}
 
@@ -21,7 +26,7 @@
 
 \chapter{Parâmetros do Circuito Equivalente}
 
-\ref{fig:parametros_preset6} mostra os parâmetros do modelo predefinido de número 6 do bloco \textit{Asynchronous Machine SI Units} do Simulink, para tipo de rotor \textit{Squirrel Cage}.
+\cref{fig:parametros_preset6} mostra os parâmetros do modelo predefinido de número 6 do bloco \textit{Asynchronous Machine SI Units} do Simulink, para tipo de rotor \textit{Squirrel Cage}.
 
 \begin{figure}[ht]
     \centering
@@ -31,7 +36,7 @@
     \small Fonte: captura de tela do programa Simulink na versão R2024b.
 \end{figure}
 
-Tais parâmetros são transcritos em \ref{tab:parametros_preset6}.
+Tais parâmetros são transcritos em \cref{tab:parametros_preset6}.
 
 \begin{table}[ht]
     \centering
@@ -53,5 +58,30 @@ Tais parâmetros são transcritos em \ref{tab:parametros_preset6}.
         Número de pares de polos & $p$ & 2 \\ \hline
     \end{tabular}
 \end{table}
+
+Destes, os parâmetros do circuito equivalente são calculados em \cref{eq:parametros_circuito_equivalente}.
+
+\begin{equation}
+    \begin{aligned}
+        w_{e} & = 2 \pi f_{n} = 2 \pi \cdot 60 = 376.99 \text{ rad/s} \\
+        V_{ph} & = \frac{V_{n}}{\sqrt{3}} = \frac{460}{\sqrt{3}} = 265.58 \text{ V} \\
+        R_{s} & = 0.0302 \Omega \\
+        X_{s} & = w_{e} L_{s} = 376.99 \cdot 0.000283 = 0.1067 \Omega \\
+        X_{m} & = w_{e} L_{m} = 376.99 \cdot 0.01095 = 4.126 \Omega \\
+        X_{r}' & = w_{e} L_{r}' = 376.99 \cdot 0.000283 = 0.1067 \Omega \\
+        R_{r} & = \frac{R_{r}'}{s} = \frac{0.1721}{s} \Omega \\
+    \end{aligned}
+    \label{eq:parametros_circuito_equivalente}
+\end{equation}
+
+\cref{fig:circuito_equivalente} mostra o circuito equivalente do motor de indução.
+
+\begin{figure}[ht]
+    \centering
+    \caption{Circuito equivalente do motor de indução.}
+    \label{fig:circuito_equivalente}
+    \includegraphics[width=0.5\textwidth]{eqv.png} \\
+    \small Fonte: captura de tela do programa KiCad na versão 9.0.x.
+\end{figure}
 
 \end{document}
