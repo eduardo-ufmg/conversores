@@ -73,18 +73,17 @@ for k = 1:length(s_full)
 end
 
 % Plotagem Curvas (a) e (b)
-figure('Name', 'Curvas Completas (0 a ns)');
-subplot(2,1,1);
+figure('Name', 'Torque x Velocidade Mecânica');
 plot(wmec_full, Torque_full, 'LineWidth', 1.5);
 grid on;
 xlabel('\omega_{mec} (rad/s)'); ylabel('Torque (N.m)');
-title('(a) Torque x Velocidade Mecânica');
+title('Torque x Velocidade Mecânica');
 
-subplot(2,1,2);
+figure('Name', 'Corrente Estator x Velocidade Mecânica');
 plot(wmec_full, I1_full_abs, 'r', 'LineWidth', 1.5);
 grid on;
 xlabel('\omega_{mec} (rad/s)'); ylabel('|I_1| (A)');
-title('(b) Corrente Estator x Velocidade Mecânica');
+title('Corrente Estator x Velocidade Mecânica');
 
 %% 4. Questão 3 - Parte C a F (Região de Operação)
 % Encontrar Torque Máximo e Escorregamento Correspondente

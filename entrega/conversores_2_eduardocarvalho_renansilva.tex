@@ -3,6 +3,26 @@
 \usepackage{graphicx}
 \usepackage{amsmath}
 \usepackage{cleveref}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\lstdefinestyle{matlabstyle}{
+    language=Matlab,
+    basicstyle=\ttfamily\small,
+    numbers=left,
+    numberstyle=\tiny,
+    stepnumber=1,
+    numbersep=8pt,
+    frame=single,
+    framerule=0.4pt,
+    breaklines=true,
+    columns=fullflexible,
+    tabsize=4,
+    keywordstyle=\color{blue!60!black}\bfseries,
+    commentstyle=\color{green!50!black}\itshape,
+    stringstyle=\color{red!60!black},
+    showstringspaces=false
+}
 
 \graphicspath{{../}}
 
@@ -10,6 +30,8 @@
 \crefname{figure}{Figura}{Figuras}
 \crefname{table}{Tabela}{Tabelas}
 \crefname{equation}{Equação}{Equações}
+\crefname{appendix}{Apêndice}{Apêndices}
+\crefname{lstlisting}{Código}{Códigos}
 
 \begin{document}
 
@@ -281,9 +303,37 @@ Pelas potências,
 
 \chapter{Curvas}
 
+As curvas e valores nesta questão são obtidos por \cref{lst:questao3}
 
+\section{$\tau \times \omega_{mec}$}
+
+\begin{figure}[ht]
+    \centering
+    \caption{Curva de torque versus velocidade mecânica.}
+    \label{fig:curva_torque_velocidade}
+    \includegraphics[width=0.7\textwidth]{a_torque_vs_velocidade.png} \\
+    \small Fonte: elaboração própria.
+\end{figure}
+
+\section{$\left|I_{s}\right| \times \omega_{mec}$}
+
+\begin{figure}[ht]
+    \centering
+    \caption{Curva de corrente de linha do estator versus velocidade mecânica.}
+    \label{fig:curva_corrente_velocidade}
+    \includegraphics[width=0.7\textwidth]{b_correnteestator_vs_velocidade.png} \\
+    \small Fonte: elaboração própria.
+\end{figure}
 
 \bibliographystyle{plain}
 \bibliography{referencias}
+
+% --- Apêndices ---
+\begin{apendices}
+\chapter{Código MATLAB 2024b para a Questão 3}
+\label{lst:questao3}
+\UseRawInputEncoding
+\lstinputlisting[style=matlabstyle,label={lst:questao3}]{../questao3.m}
+\end{apendices}
 
 \end{document}
