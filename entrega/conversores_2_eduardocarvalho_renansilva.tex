@@ -1,10 +1,12 @@
 \documentclass[portugues,msc]{ppgccufmg}
+\usepackage[brazil]{babel}
 \usepackage{graphicx}
 \usepackage{amsmath}
 \usepackage{cleveref}
 
 \graphicspath{{../}}
 
+\newcommand{\crefrangeconjunction}{ -- }
 \crefname{figure}{Figura}{Figuras}
 \crefname{table}{Tabela}{Tabelas}
 \crefname{equation}{Equação}{Equações}
@@ -50,7 +52,7 @@ Tais parâmetros são transcritos em \cref{tab:parametros_preset6}.
         Frequência nominal & $f_{n}$ & 60 Hz \\
         Resistência do estator & $R_{s}$ & 0.0302 $\Omega$ \\
         Indutância do estator & $L_{s}$ & 0.000283 H \\
-        Resistência do rotor & $R_{r}'$ & 0.1721 $\Omega$ \\
+        Resistência do rotor & $R_{r}'$ & 0.01721 $\Omega$ \\
         Indutância do rotor & $L_{r}'$ & 0.000283 H \\
         Indutância mútua & $L_{m}$ & 0.01095 H \\
         Inércia & $J$ & 2 kg.m$^{2}$ \\
@@ -59,20 +61,19 @@ Tais parâmetros são transcritos em \cref{tab:parametros_preset6}.
     \end{tabular}
 \end{table}
 
-Destes, os parâmetros do circuito equivalente são calculados em \cref{eq:parametros_circuito_equivalente}.
+Destes, os parâmetros do circuito equivalente são calculados em \crefrange{eq:velocidade_angular_eletrica}{eq:resistencia_rotor}.
 
-\begin{equation}
-    \begin{aligned}
-        w_{e} & = 2 \pi f_{n} = 2 \pi \cdot 60 = 376.99 \text{ rad/s} \\
-        V_{ph} & = \frac{V_{n}}{\sqrt{3}} = \frac{460}{\sqrt{3}} = 265.58 \text{ V} \\
-        R_{s} & = 0.0302 \Omega \\
-        X_{s} & = w_{e} L_{s} = 376.99 \cdot 0.000283 = 0.1067 \Omega \\
-        X_{m} & = w_{e} L_{m} = 376.99 \cdot 0.01095 = 4.126 \Omega \\
-        X_{r}' & = w_{e} L_{r}' = 376.99 \cdot 0.000283 = 0.1067 \Omega \\
-        R_{r} & = \frac{R_{r}'}{s} = \frac{0.1721}{s} \Omega \\
-    \end{aligned}
-    \label{eq:parametros_circuito_equivalente}
-\end{equation}
+\begin{align}
+    w_{e} & = 2 \pi f_{n} = 2 \pi \cdot 60 = 376.99 \text{ rad/s} \\ \label{eq:velocidade_angular_eletrica}
+    V_{ph} & = \frac{V_{n}}{\sqrt{3}} = \frac{460}{\sqrt{3}} = 265.58 \text{ V} \\
+    R_{s} & = 0.0302 \Omega \\
+    X_{s} & = w_{e} L_{s} = 376.99 \cdot 0.000283 = 0.1067 \Omega \\
+    X_{m} & = w_{e} L_{m} = 376.99 \cdot 0.01095 = 4.126 \Omega \\
+    X_{r}' & = w_{e} L_{r}' = 376.99 \cdot 0.000283 = 0.1067 \Omega \\
+    R_{r} & = \frac{R_{r}'}{s} = \frac{0.01721}{s} \Omega \label{eq:resistencia_rotor}
+\end{align}
+
+Este trabalho considera $P_n = P_\text{out}$.
 
 \cref{fig:circuito_equivalente} mostra o circuito equivalente do motor de indução.
 
@@ -83,5 +84,117 @@ Destes, os parâmetros do circuito equivalente são calculados em \cref{eq:param
     \includegraphics[width=0.5\textwidth]{eqv.png} \\
     \small Fonte: captura de tela do programa KiCad na versão 9.0.x.
 \end{figure}
+
+\chapter{Operação em Condições Nominais}
+
+\section{Escorregamento}
+
+Do circuito,
+
+\begin{align}
+    Z_{r}'(s) &= \frac{R_{r}'}{s} + jX_{r}' \\
+    Z_{s} &= R_{s} + jX_{s} \\
+    Z_{m} &= jX_{m} \\
+    Z_{par}(s) &= \frac{Z_{m}Z_{r}'(s)}{Z_{m} + Z_{r}'(s)} \\
+    Z_{eq}(s) &= Z_{s} + Z_{par}(s) \\
+    I_{s}(s) &= \frac{V_{ph}}{Z_{eq}(s)} \\
+    I_{r}'(s) &= I_{s}(s)\frac{Z_{m}}{Z_{m}+Z_{r}'(s)} \\
+    \left|I_{r}'(s)\right| &= \frac{V_{ph}X_{m}}{\sqrt{\text{Re}^2 + \text{Im}^2}} \\
+    P_{n} &= 3\left|I_{r}'(s)\right|^{2}R_{r}'\frac{1-s}{s}
+\end{align}
+
+para
+
+\begin{align}
+    \text{Re} &= \frac{R_{s}R_{r}'}{s} - X_{s}(X_{m} + X_{r}') - X_{m}X_{r}' \\
+    \text{Im} &= R_{s}(X_{m} + X_{r}') + \frac{R_{r}'}{s}(X_{s} + X_{m}) \\
+\end{align}
+
+No motor estudado,
+
+\begin{align}
+    \text{Re} &= \frac{0.0302 \cdot 0.01721}{s} - 0.1067(4.126 + 0.1067) - 4.126 \cdot 0.1067 \\
+       &= \frac{0.000519742}{s} - 0.891873 \\
+    \text{Im} &= 0.0302(4.126 + 0.1067) + \frac{0.01721}{s}(0.1067 + 4.126) \\
+       &= 0.127828 + \frac{0.0728448}{s} \\
+    \text{Re}^{2} + \text{Im}^2 &= \left(\frac{0.000519742}{s} - 0.891873\right)^{2} + \left(0.127828 + \frac{0.0728448}{s}\right)^{2} \\
+       &= \frac{0.812s^{2} + 0.0177s + 0.00531}{s^{2}} \\
+\end{align}
+
+Assim,
+
+\begin{align}
+    111900 &= 3 \left(\frac{265.58 \cdot 4.126}{\sqrt{\frac{0.812s^{2} + 0.0177s + 0.00531}{s^{2}}}}\right)^{2}0.01721\frac{1-s}{s} \\
+    111900 &= 0.05163 \frac{1200740}{\frac{0.812s^{2} + 0.0177s + 0.00531}{s^{2}}}\frac{1-s}{s} \\
+    111900 &= 61994\frac{s(1-s)}{0.812s^{2} + 0.0177s + 0.00531} \\
+    1.805 &= \frac{s - s^{2}}{0.812s^{2} + 0.0177s + 0.00531} \\
+    s - s^{2} &= 1.466s^{2} + 0.0319s + 0.00959 \\
+    0 &= 2.466s^{2} - 0.9681s + 0.00959 \\
+\end{align}
+
+Cujas soluções são
+
+\begin{align}
+    s_{0} &= 0.0102 \\
+    s_{1} &= 0.3824
+\end{align}
+
+Conforme \cite{Chapman2013},
+
+\begin{equation}
+    s_\text{max} = \frac{R_{r}'}{\sqrt{R_{s}^{2}\left( \frac{X_{m}}{ X_{s} + X_{m} } \right)^{4} + (X_{s} + X_{r}')^{2}}}
+\end{equation}
+
+Para os valores considerados,
+
+\begin{align}
+    s_\text{max} &= \frac{0.01721}{\sqrt{0.0302^{2}\left( \frac{4.126}{ 0.1067 + 4.126 } \right)^{4} + (0.1067 + 0.1067)^{2}}} \\
+       &\approx 0.08
+\end{align}
+
+Por operar em condições nominais, $s < s_\text{max}$. Portanto, 
+
+\begin{equation}
+    s = s_{0} = 0.0102 = 1.02\%
+\end{equation}
+
+\section{Velocidade Mecânica}
+
+\begin{align}
+    n_{sinc} &= \frac{60\cdot{}f_{n}}{p} \\
+    n_{sinc} &= \frac{60\cdot60}{2} \\
+             &= 1800 \text{ rpm} \\
+    n &= n_{sinc}(1 - s) \\
+      &= 1800(1 - 0.0102) \\
+      &= 1781.64 \text{ rpm}
+\end{align}
+
+\section{Corrente do Estator}
+
+Sob escorregamento nominal,
+
+\begin{align}
+    Z_{r}' &= \frac{0.01721}{0.0102} + j0.1067 \\
+           &= 1.687 + j0.1067\ \Omega \\
+    Z_{par} &= \frac{j4.126(1.687 + j0.1067)}{j4.126 + 1.687 + j0.1067} \\
+           &= 1.384 + j0.655\ \Omega \\
+    Z_{eq} &= (0.0302 + j0.1067) + (1.384 + j0.655) \\
+           &= 1.414 + j0.762\ \Omega \\
+           &= 1.606 \angle 28.3^\circ\ \Omega \\
+\end{align}
+
+Então,
+
+\begin{align}
+    I_{s} &= \frac{265.58}{1.606 \angle 28.3^\circ} \\
+          &= 165.4 \angle -28.3^\circ\ \text{A}
+\end{align}
+
+\section{Torque}
+
+
+
+\bibliographystyle{plain}
+\bibliography{referencias}
 
 \end{document}
