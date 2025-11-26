@@ -192,6 +192,95 @@ Então,
 
 \section{Torque}
 
+Na velocidade mecânica nominal,
+
+\begin{align}
+    w_{m} &= \frac{2\pi n}{60} \\
+           &= \frac{2\pi \cdot 1781.64}{60} \\
+           &= 186.7\ \text{rad/s} \\
+    T_{n} &= \frac{P_{n}}{w_{m}} \\
+           &= \frac{111900}{186.7} \\
+           &= 599.5\ \text{Nm}
+\end{align}
+
+\section{Potência Ativa de Entrada}
+
+Pelas grandezas de linha,
+
+\begin{align}
+    P_\text{in} &= \sqrt{3} V_{n} I_{s} \cos\phi \\
+           &= \sqrt{3} \cdot 460 \cdot 165.4 \cdot \cos 28.3^\circ \\
+           &= 116030\ \text{W}
+\end{align}
+
+\section{Potência Reativa de Entrada}
+
+Pelas grandezas de linha,
+
+\begin{align}
+    Q_\text{in} &= \sqrt{3} V_{n} I_{s} \sin\phi \\
+           &= \sqrt{3} \cdot 460 \cdot 165.4 \cdot \sin 28.3^\circ \\
+           &= 62476\ \text{var}
+\end{align}
+
+\section{Potência Aparente de Entrada}
+
+Por definição,
+
+\begin{align}
+    S_\text{in} &= P_\text{in} + jQ_\text{in} \\
+           &= 116030 + j62476\ \text{VA} \\
+    \left| S_\text{in} \right| &= \sqrt{P_\text{in}^{2} + Q_\text{in}^{2}} \\
+           &= \sqrt{116030^{2} + 62476^{2}} \\
+           &= 131.8\ \text{kVA}
+\end{align}
+
+\section{Fator de Potência}
+
+Por definição,
+
+\begin{align}
+    \text{fp} &= \cos\phi \text{ característica }\\
+              &= \cos 28.3^\circ \text{ atrasado} \\
+              &= 0.880 \text{ atrasado}
+\end{align}
+
+\section{Eficiência}
+
+Pelas potências,
+
+\begin{align}
+    \eta &= \frac{P_\text{out}}{P_\text{in}} \\
+         &= \frac{111900}{116030} \\
+         &= 0.9645 \\
+         &= 96.45\%
+\end{align}
+
+\section{Características Nominais}
+
+\cref{tab:caracteristicas_nominais} apresenta as características nominais calculadas.
+
+\begin{table}[ht]
+    \centering
+    \caption{Características nominais calculadas.}
+    \label{tab:caracteristicas_nominais}
+    \begin{tabular}{lll}
+        \hline
+        \textbf{Grandeza} & \textbf{Símbolo} & \textbf{Valor} \\ \hline
+        Escorregamento & $s$ & 1.02\% \\
+        Velocidade mecânica & $n$ & 1781.64 rpm \\
+        Corrente de linha do estator & $I_s$ & 165.4 A \\
+        Torque nominal & $T_n$ & 599.5 Nm \\
+        Potência ativa de entrada & $P_\text{in}$ & 116030 W \\
+        Potência reativa de entrada & $Q_\text{in}$ & 62476 var \\
+        Potência aparente de entrada & $|S_\text{in}|$ & 131.8 kVA \\
+        Fator de potência & $\text{fp}$ & 0.880 atrasado \\
+        Eficiência & $\eta$ & 96.45\% \\ \hline
+    \end{tabular}
+\end{table}
+
+\chapter{Curvas}
+
 
 
 \bibliographystyle{plain}
