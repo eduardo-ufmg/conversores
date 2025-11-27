@@ -6,6 +6,8 @@
 \usepackage{listings}
 \usepackage{xcolor}
 
+\emergencystretch 1em
+
 \lstdefinestyle{matlabstyle}{
     language=Matlab,
     basicstyle=\ttfamily\small,
@@ -103,7 +105,7 @@ Este trabalho considera $P_n = P_\text{out}$.
     \centering
     \caption{Circuito equivalente do motor de indução.}
     \label{fig:circuito_equivalente}
-    \includegraphics[width=0.5\textwidth]{eqv.png} \\
+    \includegraphics[width=0.7\textwidth]{eqv.png} \\
     \small Fonte: captura de tela do programa KiCad na versão 9.0.x.
 \end{figure}
 
@@ -305,7 +307,11 @@ Pelas potências,
 
 As curvas e valores nesta questão são obtidos por \cref{lst:questao3}
 
-\section{$\tau \times \omega_{mec}$}
+\section{Faixa Completa de Velocidade}
+
+\subsection{$\tau \times n_{mec}$}
+
+\cref{fig:curva_torque_velocidade} mostra a curva de torque versus velocidade mecânica do motor de indução considerado.
 
 \begin{figure}[ht]
     \centering
@@ -315,7 +321,9 @@ As curvas e valores nesta questão são obtidos por \cref{lst:questao3}
     \small Fonte: elaboração própria.
 \end{figure}
 
-\section{$\left|I_{s}\right| \times \omega_{mec}$}
+\subsection{$\left|I_{s}\right| \times n_{mec}$}
+
+\cref{fig:curva_corrente_velocidade} mostra a curva de corrente de linha do estator versus velocidade mecânica do motor de indução considerado.
 
 \begin{figure}[ht]
     \centering
@@ -324,6 +332,172 @@ As curvas e valores nesta questão são obtidos por \cref{lst:questao3}
     \includegraphics[width=0.7\textwidth]{b_correnteestator_vs_velocidade.png} \\
     \small Fonte: elaboração própria.
 \end{figure}
+
+\section{Operação Nominal, Faixa de Carga}
+
+Por busca de máximo no vetor de torque calculado na faixa completa de velocidade, o torque máximo e o escorregamento correspondente são:
+
+\begin{align}
+    \tau_\text{max} &= 2208.12\ \text{Nm} \\
+    s_{\tau_\text{max}} &= 0.0810 = 8.10\%
+\end{align}
+
+\subsection{$\eta \times P_{mec}$}
+
+\cref{fig:curva_eficiencia_potencia} mostra a curva de eficiência versus potência mecânica do motor de indução na faixa de operação.
+
+\begin{figure}[ht]
+    \centering
+    \caption{Curva de eficiência versus potência mecânica.}
+    \label{fig:curva_eficiencia_potencia}
+    \includegraphics[width=0.7\textwidth]{c_eficiencia_vs_pmec.png} \\
+    \small Fonte: elaboração própria.
+\end{figure}
+
+\subsection{$fp \times P_{mec}$}
+
+\cref{fig:curva_fp_potencia} mostra a curva de fator de potência versus potência mecânica do motor de indução na faixa de operação.
+
+\begin{figure}[ht]
+    \centering
+    \caption{Curva de fator de potência versus potência mecânica.}
+    \label{fig:curva_fp_potencia}
+    \includegraphics[width=0.7\textwidth]{d_fp_vs_pmec.png} \\
+    \small Fonte: elaboração própria.
+\end{figure}
+
+\subsection{$s \times P_{mec}$}
+
+\cref{fig:curva_escorregamento_potencia} mostra a curva de escorregamento versus potência mecânica do motor de indução na faixa de operação.
+
+\begin{figure}[ht]
+    \centering
+    \caption{Curva de escorregamento versus potência mecânica.}
+    \label{fig:curva_escorregamento_potencia}
+    \includegraphics[width=0.7\textwidth]{e_s_vs_pmec.png} \\
+    \small Fonte: elaboração própria.
+\end{figure}
+
+\subsection{$\left|I_{s}\right| \times P_{mec}$}
+
+\cref{fig:curva_corrente_potencia} mostra a curva de corrente de linha do estator versus potência mecânica do motor de indução na faixa de operação.
+
+\begin{figure}[ht]
+    \centering
+    \caption{Curva de corrente de linha do estator versus potência mecânica.}
+    \label{fig:curva_corrente_potencia}
+    \includegraphics[width=0.7\textwidth]{f_corrente_vs_pmec.png} \\
+    \small Fonte: elaboração própria.
+\end{figure}
+
+\section{Tabela de Partida e Máximos}
+
+\cref{tab:partida_maximos} apresenta os valores de corrente de partida, razão entre corrente de partida e corrente nominal, torque de partida, razão entre torque de partida e torque nominal, corrente no torque máximo, razão entre corrente no torque máximo e corrente nominal, torque máximo, escorregamento no torque máximo e razão entre torque máximo e torque nominal.
+
+\begin{table}[ht]
+    \centering
+    \caption{Valores de partida e máximos do motor de indução.}
+    \label{tab:partida_maximos}
+    \begin{tabular}{ll}
+        \hline
+        \textbf{Grandeza} & \textbf{Valor} \\ \hline
+        Corrente de partida & 1231 A \\
+        Razão entre corrente de partida e corrente nominal & 7.44 \\
+        Torque de partida & 394 Nm \\
+        Razão entre torque de partida e torque nominal & 0.65 \\
+        Corrente no torque máximo & 830 A \\
+        Razão entre corrente no torque máximo e corrente nominal & 5 \\
+        Torque máximo & 2208.12 Nm \\
+        Escorregamento no torque máximo & 8.10\% \\
+        Razão entre torque máximo e torque nominal & 3.67 \\ \hline
+    \end{tabular}
+\end{table}
+
+\section{Operação a Vazio}
+
+Na operação a vazio, este trabalho considera $s = 0.001$.
+
+\subsection{Corrente a Vazio}
+
+\begin{align}
+    Z_{r}' &= \frac{0.01721}{0.001} + j0.1067 \\
+           &= 17.21 + j0.1067\ \Omega \\
+    Z_{par} &= \frac{j4.126(17.21 + j0.1067)}{j4.126 + 17.21 + j0.1067} \\
+           &= 0.933 + j3.897\ \Omega \\
+    Z_{eq} &= (0.0302 + j0.1067) + (0.933 + j3.897) \\
+           &= 0.963 + j4.004\ \Omega \\
+           &= 4.118 \angle 76.48^\circ\ \Omega \\
+    I_{s} &= \frac{265.58}{4.118 \angle 76.48^\circ} \\
+          &= 64.48 \angle -76.48^\circ\ \text{A}
+\end{align}
+
+\subsection{Fator de Potência a Vazio}
+
+\begin{align}
+    \phi &= 76.48^\circ \\
+    \text{fp} &= \cos\phi \text{ característica }\\
+              &= \cos 76.48^\circ \text{ atrasado} \\
+              &= 0.234 \text{ atrasado}
+\end{align}
+
+\section{Análise dos Valores Obtidos}
+
+\subsection{Corrente de Estator acima da Nominal}
+
+A operação contínua do motor de indução com corrente de estator acima da nominal resulta em:
+
+\begin{itemize}
+    \item \textbf{Aquecimento excessivo}: O aumento das perdas Joule ($I^2R$) nos enrolamentos do estator eleva a temperatura, podendo degradar o isolamento dos condutores e reduzir a vida útil do motor.
+    \item \textbf{Sobrecarga térmica}: A temperatura excessiva pode causar deterioração dos materiais isolantes, levando a curtos-circuitos e falhas permanentes.
+    \item \textbf{Aumento das perdas}: Perdas no cobre do estator aumentam proporcionalmente ao quadrado da corrente, reduzindo a eficiência do motor.
+    \item \textbf{Desmagnetização}: Em casos extremos, o aquecimento pode afetar as propriedades magnéticas do núcleo ferromagnético.
+    \item \textbf{Necessidade de proteção}: Requer sistemas de proteção adequados (relés térmicos, disjuntores) para evitar danos permanentes ao equipamento.
+\end{itemize}
+
+Por estas razões, a operação em condições nominais é fundamental para garantir a confiabilidade e longevidade do motor de indução.
+
+\subsection{Fator de Potência em Vazio}
+
+O fator de potência em vazio é significativamente menor que o fator de potência nominal devido à natureza da corrente consumida pelo motor nas duas condições:
+
+\begin{itemize}
+    \item \textbf{Operação a vazio}: A corrente é predominantemente reativa, destinada principalmente à magnetização do entreferro. Com escorregamento muito baixo ($s \approx 0.001$), a impedância do rotor refletida é muito alta ($Z_r' \approx 17.21 + j0.1067\ \Omega$), fazendo com que a maior parte da corrente circule pelo ramo magnetizante ($X_m = 4.126\ \Omega$). O ângulo de fase $\phi = 76.48^\circ$ indica que a corrente está quase em quadratura com a tensão.
+    
+    \item \textbf{Operação nominal}: A corrente possui uma componente ativa significativa para fornecer a potência mecânica de saída. Com escorregamento nominal ($s = 0.0102$), a impedância do rotor refletida diminui ($Z_r' \approx 1.687 + j0.1067\ \Omega$), permitindo maior circulação de corrente pelo rotor e, consequentemente, maior conversão de potência elétrica em mecânica. O ângulo de fase $\phi = 28.3^\circ$ resulta em maior componente ativa da corrente.
+\end{itemize}
+
+A vazio, o motor consome potência principalmente para estabelecer o campo magnético (potência reativa), enquanto com carga nominal há significativa conversão de potência ativa em trabalho mecânico, elevando o fator de potência.
+
+\subsection{Fator de Serviço}
+
+Segundo \cite{Chapman2013}, o fator de serviço (FS) é uma medida da capacidade do motor de operar acima de sua potência nominal sem danos. É definido como a razão entre a potência máxima que o motor pode suportar \textbf{em regime contínuo} e sua potência nominal.
+
+\chapter{Frequência Variável}
+
+\section{Curvas de Torque versus Velocidade Mecânica para Diferentes Escalas de Tensão e Frequência}
+
+\cref{lst:questao4} apresenta o código MATLAB 2024b utilizado para gerar as curvas de torque versus velocidade mecânica para diferentes escalas de tensão e frequência. \cref{fig:curva_torque_velocidade_vf_variavel} mostra como a relação entre torque e velocidade mecânica varia conforme a escala de tensão e frequência aplicada ao motor de indução.
+
+\begin{figure}[ht]
+    \centering
+    \caption{Curva de torque versus velocidade mecânica para diferentes escalas de tensão e frequência.}
+    \label{fig:curva_torque_velocidade_vf_variavel}
+    \includegraphics[width=0.7\textwidth]{4_torque_vs_velocidade_vf_variavel.png} \\
+    \small Fonte: elaboração própria.
+\end{figure}
+
+\section{Vantagens da Operação em Velocidade Variável}
+
+A operação de motores de indução em velocidade variável, viabilizada principalmente pelo avanço dos acionamentos eletrônicos de potência, transformou a aplicação dessas máquinas na indústria. Tradicionalmente, os motores de indução eram vistos como máquinas de velocidade constante, limitados pela frequência da rede de alimentação \cite{Fitzgerald2014}. No entanto, a implementação de estratégias de controle moderno trouxe benefícios significativos.
+
+\subsection{Eficiência Energética}
+Uma das principais vantagens é a melhoria na eficiência energética. Em muitas aplicações industriais, como bombas centrífugas e ventiladores, a potência consumida varia com o cubo da velocidade. \cite{Chapman2013} destaca que o ajuste da velocidade do motor para atender exatamente à demanda da carga é muito mais eficiente do que métodos mecânicos de controle de fluxo, como o uso de válvulas ou amortecedores. Isso permite uma redução substancial no consumo de energia quando o sistema não opera em capacidade máxima.
+
+\subsection{Controle de Partida e Redução de Estresse Mecânico}
+A partida direta de motores de indução pode resultar em correntes de partida extremamente elevadas, frequentemente excedendo a corrente nominal em muitas vezes, o que causa quedas de tensão na rede e estresse térmico nos enrolamentos \cite{Chapman2013}. O uso de variadores de velocidade permite uma partida suave, onde a tensão e a frequência são aumentadas gradualmente. Isso limita a corrente de partida a níveis seguros e reduz o choque mecânico no eixo e na carga acoplada, prolongando a vida útil do equipamento \cite{Fitzgerald2014}.
+
+\subsection{Desempenho Dinâmico e Flexibilidade}
+Com o advento de técnicas avançadas como o controle vetorial, os motores de indução podem atingir um desempenho dinâmico comparável ao dos motores de corrente contínua. \cite{Fitzgerald2014} explicam que essas técnicas permitem o controle desacoplado do fluxo e do conjugado, oferecendo respostas rápidas a variações de carga e precisão no controle de velocidade, inclusive em baixas rotações. Além disso, os acionamentos modernos permitem a operação acima da velocidade síncrona nominal através do enfraquecimento de campo, aumentando a flexibilidade operacional da máquina \cite{Chapman2013}.
 
 \bibliographystyle{plain}
 \bibliography{referencias}
@@ -334,6 +508,11 @@ As curvas e valores nesta questão são obtidos por \cref{lst:questao3}
 \label{lst:questao3}
 \UseRawInputEncoding
 \lstinputlisting[style=matlabstyle,label={lst:questao3}]{../questao3.m}
+
+\chapter{Código MATLAB 2024b para a Questão 4}
+\label{lst:questao4}
+\UseRawInputEncoding
+\lstinputlisting[style=matlabstyle,label={lst:questao4}]{../questao4.m}
 \end{apendices}
 
 \end{document}

@@ -73,22 +73,26 @@ for k = 1:length(s_full)
 end
 
 % Plotagem Curvas (a) e (b)
-figure('Name', 'Torque x Velocidade Mecânica');
-plot(wmec_full, Torque_full, 'LineWidth', 1.5);
+fig0 = figure('Name', 'Torque x Velocidade Mecânica');
+plot(nmec_full, Torque_full, 'LineWidth', 1.5);
 grid on;
-xlabel('\omega_{mec} (rad/s)'); ylabel('Torque (N.m)');
+xlabel('n_{mec} (rpm)'); ylabel('Torque (N.m)');
 title('Torque x Velocidade Mecânica');
+saveas(fig0, 'a_torque_vs_velocidade.png');
 
-figure('Name', 'Corrente Estator x Velocidade Mecânica');
-plot(wmec_full, I1_full_abs, 'r', 'LineWidth', 1.5);
+fig1 = figure('Name', 'Corrente Estator x Velocidade Mecânica');
+plot(nmec_full, I1_full_abs, 'r', 'LineWidth', 1.5);
 grid on;
-xlabel('\omega_{mec} (rad/s)'); ylabel('|I_1| (A)');
+xlabel('n_{mec} (rpm)'); ylabel('|I_1| (A)');
 title('Corrente Estator x Velocidade Mecânica');
+saveas(fig1, 'b_correnteestator_vs_velocidade.png');
 
 %% 4. Questão 3 - Parte C a F (Região de Operação)
 % Encontrar Torque Máximo e Escorregamento Correspondente
 [T_max, idx_max] = max(Torque_full);
 s_Tmax = s_full(idx_max);
+
+fprintf('Torque Máximo (Tmax): %.2f N.m em s = %.4f\n', T_max, s_Tmax);
 
 % Novo vetor de escorregamento
 s_op = 0.001:0.001:s_Tmax;
@@ -128,22 +132,25 @@ for k = 1:length(s_op)
 end
 
 % Plotagem Curvas (c) a (f)
-figure('Name', 'Curvas na Região de Operação');
-subplot(2,2,1);
+fig2 = figure('Name', 'Eficiência x P_{mec}');
 plot(Pmec_op, eta_op, 'LineWidth', 1.5); grid on;
-xlabel('P_{mec} (W)'); ylabel('Eficiência \eta (%)'); title('(c) Eficiência x P_{mec}');
+xlabel('P_{mec} (W)'); ylabel('Eficiência \eta (%)'); title('Eficiência x P_{mec}');
+saveas(fig2, 'c_eficiencia_vs_pmec.png');
 
-subplot(2,2,2);
+fig3 = figure('Name', 'Fator de Potência x P_{mec}');
 plot(Pmec_op, fp_op, 'LineWidth', 1.5); grid on;
-xlabel('P_{mec} (W)'); ylabel('Fator de Potência'); title('(d) FP x P_{mec}');
+xlabel('P_{mec} (W)'); ylabel('Fator de Potência'); title('Fator de Potência x P_{mec}');
+saveas(fig3, 'd_fp_vs_pmec.png');
 
-subplot(2,2,3);
+fig4 = figure('Name', 'Escorregamento x P_{mec}');
 plot(Pmec_op, s_op, 'LineWidth', 1.5); grid on;
-xlabel('P_{mec} (W)'); ylabel('Escorregamento s'); title('(e) s x P_{mec}');
+xlabel('P_{mec} (W)'); ylabel('Escorregamento s'); title('Escorregamento x P_{mec}');
+saveas(fig4, 'e_s_vs_pmec.png');
 
-subplot(2,2,4);
+fig5 = figure('Name', 'Corrente Estator x P_{mec}');
 plot(Pmec_op, I1_op_abs, 'LineWidth', 1.5); grid on;
-xlabel('P_{mec} (W)'); ylabel('|I_1| (A)'); title('(f) Corrente x P_{mec}');
+xlabel('P_{mec} (W)'); ylabel('|I_1| (A)'); title('Corrente Estator x P_{mec}');
+saveas(fig5, 'f_corrente_vs_pmec.png');
 
 %% 5. Questão 3 - Dados Tabulados (G a O)
 % Partida (s = 1)
